@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>main_window</class>
+ <widget class="QMainWindow" name="main_window">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>720</width>
+    <height>605</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Game Knight</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="images.qrc">
+    <normaloff>:/images/icon.ico</normaloff>:/images/icon.ico</iconset>
+  </property>
+  <widget class="QWidget" name="centralWidget">
+   <widget class="QPushButton" name="endButtonMovement">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>410</y>
+      <width>91</width>
+      <height>121</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>13</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>End
+Movement</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="player_1_picture">
+    <property name="geometry">
+     <rect>
+      <x>23</x>
+      <y>20</y>
+      <width>100</width>
+      <height>100</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset resource="images.qrc">
+      <normaloff>:/images/profile.png</normaloff>:/images/profile.png</iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>100</width>
+      <height>100</height>
+     </size>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="player_2_picture">
+    <property name="geometry">
+     <rect>
+      <x>23</x>
+      <y>177</y>
+      <width>100</width>
+      <height>100</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset resource="images.qrc">
+      <normaloff>:/images/profile.png</normaloff>:/images/profile.png</iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>100</width>
+      <height>100</height>
+     </size>
+    </property>
+   </widget>
+   <widget class="QLabel" name="player_1_name">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>127</y>
+      <width>100</width>
+      <height>13</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>10</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Player 1</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="player_1_points">
+    <property name="geometry">
+     <rect>
+      <x>23</x>
+      <y>147</y>
+      <width>100</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>10</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>0</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="player_2_name">
+    <property name="geometry">
+     <rect>
+      <x>23</x>
+      <y>287</y>
+      <width>100</width>
+      <height>13</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>10</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Player 2</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="player_2_points">
+    <property name="geometry">
+     <rect>
+      <x>23</x>
+      <y>307</y>
+      <width>100</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>10</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>0</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>720</width>
+     <height>19</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuGame">
+    <property name="title">
+     <string>&amp;Game</string>
+    </property>
+    <widget class="QMenu" name="menu_New_game">
+     <property name="title">
+      <string>&amp;New game</string>
+     </property>
+     <addaction name="actionGame_with_man"/>
+     <addaction name="actionGame_with_computer"/>
+    </widget>
+    <addaction name="menu_New_game"/>
+    <addaction name="action_Game_rules"/>
+    <addaction name="action_About_game"/>
+    <addaction name="action_End_game"/>
+   </widget>
+   <widget class="QMenu" name="menuOptions">
+    <property name="title">
+     <string>Options</string>
+    </property>
+    <widget class="QMenu" name="menuComputer_difficulty">
+     <property name="title">
+      <string>Computer difficulty</string>
+     </property>
+     <addaction name="actionEasy"/>
+     <addaction name="actionHard"/>
+    </widget>
+    <addaction name="menuComputer_difficulty"/>
+    <addaction name="actionPlaying_with_the_computer"/>
+   </widget>
+   <addaction name="menuGame"/>
+   <addaction name="menuOptions"/>
+  </widget>
+  <widget class="QStatusBar" name="statusBar"/>
+  <action name="action_End_game">
+   <property name="text">
+    <string>&amp;End game</string>
+   </property>
+  </action>
+  <action name="actionGame_with_man">
+   <property name="text">
+    <string>Game with &amp;man</string>
+   </property>
+  </action>
+  <action name="actionGame_with_computer">
+   <property name="text">
+    <string>Game with &amp;computer</string>
+   </property>
+  </action>
+  <action name="action_About_game">
+   <property name="text">
+    <string>&amp;About game</string>
+   </property>
+  </action>
+  <action name="action_Game_rules">
+   <property name="text">
+    <string>&amp;Game rules</string>
+   </property>
+  </action>
+  <action name="actionEasy">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>&amp;Easy</string>
+   </property>
+  </action>
+  <action name="actionHard">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>&amp;Hard</string>
+   </property>
+  </action>
+  <action name="actionPlaying_with_the_computer">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Playing with the &amp;computer</string>
+   </property>
+  </action>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources>
+  <include location="images.qrc"/>
+ </resources>
+ <connections/>
+</ui>
