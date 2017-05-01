@@ -541,6 +541,20 @@ void main_window::end_turn()
         player_2_name_bold (true);
         players_set_text (true, true, false);
     }
+    else if ((end_game() == 1) && (settings::get_game_with_computer() == true))
+    {
+        set_player_2_points (std::to_string(stoi(get_player_2_points())+1));
+        set_of_moves->finds_movements(main_tile);
+        movement temp_movement = set_of_moves->return_movement();
+        if (temp_movement.get_movement_weight() != 0)
+        {
+            set_of_moves->do_movement (temp_movement);
+        }
+        end_turn();
+        player_1_name_bold (false);
+        player_2_name_bold (true);
+        players_set_text (true, true, false);
+    }
     else if (end_game() == 2)
     {
         //turn without change
@@ -583,19 +597,6 @@ void main_window::end_turn()
         jump_from_field[0] = 0;
         jump_from_field[1] = 0;
         now_jumping = false;
-
-        if ((end_game() == 1) && (settings::get_game_with_computer() == true))
-        {
-            if (stoi(get_player_1_points()) > stoi(get_player_2_points()))
-            {
-                set_player_1_points (std::to_string(stoi(get_player_1_points())+5*(rand()%5+1)));
-            }
-            else if (stoi(get_player_1_points()) < stoi(get_player_2_points()))
-            {
-                set_player_2_points (std::to_string(stoi(get_player_2_points())+5*(rand()%5+1)));
-            }
-            set_pawns();
-        }
         return;
     }
 
@@ -622,13 +623,13 @@ int main_window::end_game()
     bool black_pawns_wins = false;
 
     //check black
-    if ((main_tile[0][1]->get_piece() == 1) && (main_tile[0][1]->get_piece_color() == 1) && (main_tile[0][3]->get_piece() == 1) && (main_tile[0][3]->get_piece_color() == 1) && (main_tile[0][5]->get_piece() == 1) && (main_tile[0][5]->get_piece_color() == 1) && (main_tile[0][7]->get_piece() == 1) && (main_tile[0][7]->get_piece_color() == 1) && (main_tile[1][0]->get_piece() == 1) && (main_tile[1][0]->get_piece_color() == 1) && (main_tile[1][2]->get_piece() == 1) && (main_tile[1][2]->get_piece_color() == 1) && (main_tile[1][4]->get_piece() == 1) && (main_tile[1][4]->get_piece_color() == 1) && (main_tile[1][6]->get_piece() == 1) && (main_tile[1][6]->get_piece_color() == 1))
+    if ((main_tile[0][0]->get_piece() == 1) && (main_tile[0][0]->get_piece_color() == 1) && (main_tile[0][1]->get_piece() == 1) && (main_tile[0][1]->get_piece_color() == 1) && (main_tile[0][2]->get_piece() == 1) && (main_tile[0][2]->get_piece_color() == 1) && (main_tile[0][3]->get_piece() == 1) && (main_tile[0][3]->get_piece_color() == 1) && (main_tile[0][4]->get_piece() == 1) && (main_tile[0][4]->get_piece_color() == 1) && (main_tile[0][5]->get_piece() == 1) && (main_tile[0][5]->get_piece_color() == 1) && (main_tile[0][6]->get_piece() == 1) && (main_tile[0][6]->get_piece_color() == 1) && (main_tile[0][7]->get_piece() == 1) && (main_tile[0][7]->get_piece_color() == 1) && (main_tile[1][0]->get_piece() == 1) && (main_tile[1][0]->get_piece_color() == 1) && (main_tile[1][1]->get_piece() == 1) && (main_tile[1][1]->get_piece_color() == 1) && (main_tile[1][2]->get_piece() == 1) && (main_tile[1][2]->get_piece_color() == 1) && (main_tile[1][3]->get_piece() == 1) && (main_tile[1][3]->get_piece_color() == 1) && (main_tile[1][4]->get_piece() == 1) && (main_tile[1][4]->get_piece_color() == 1) && (main_tile[1][5]->get_piece() == 1) && (main_tile[1][5]->get_piece_color() == 1) && (main_tile[1][6]->get_piece() == 1) && (main_tile[1][6]->get_piece_color() == 1) && (main_tile[1][7]->get_piece() == 1) && (main_tile[1][7]->get_piece_color() == 1))
     {
         black_pawns_wins = true;
     }
 
     //check white
-    if ((main_tile[6][1]->get_piece() == 1) && (main_tile[6][1]->get_piece_color() == 0) && (main_tile[6][3]->get_piece() == 1) && (main_tile[6][3]->get_piece_color() == 0) && (main_tile[6][5]->get_piece() == 1) && (main_tile[6][5]->get_piece_color() == 0) && (main_tile[6][7]->get_piece() == 1) && (main_tile[6][7]->get_piece_color() == 0) && (main_tile[7][0]->get_piece() == 1) && (main_tile[7][0]->get_piece_color() == 0) && (main_tile[7][2]->get_piece() == 1) && (main_tile[7][2]->get_piece_color() == 0) && (main_tile[7][4]->get_piece() == 1) && (main_tile[7][4]->get_piece_color() == 0) && (main_tile[7][6]->get_piece() == 1) && (main_tile[7][6]->get_piece_color() == 0))
+    if ((main_tile[6][0]->get_piece() == 1) && (main_tile[6][0]->get_piece_color() == 0) && (main_tile[6][1]->get_piece() == 1) && (main_tile[6][1]->get_piece_color() == 0) && (main_tile[6][2]->get_piece() == 1) && (main_tile[6][2]->get_piece_color() == 0) && (main_tile[6][3]->get_piece() == 1) && (main_tile[6][3]->get_piece_color() == 0) && (main_tile[6][4]->get_piece() == 1) && (main_tile[6][4]->get_piece_color() == 0) && (main_tile[6][5]->get_piece() == 1) && (main_tile[6][5]->get_piece_color() == 0) && (main_tile[6][6]->get_piece() == 1) && (main_tile[6][6]->get_piece_color() == 0) && (main_tile[6][7]->get_piece() == 1) && (main_tile[6][7]->get_piece_color() == 0) && (main_tile[7][0]->get_piece() == 1) && (main_tile[7][0]->get_piece_color() == 0) && (main_tile[7][1]->get_piece() == 1) && (main_tile[7][1]->get_piece_color() == 0) && (main_tile[7][2]->get_piece() == 1) && (main_tile[7][2]->get_piece_color() == 0) && (main_tile[7][3]->get_piece() == 1) && (main_tile[7][3]->get_piece_color() == 0) && (main_tile[7][4]->get_piece() == 1) && (main_tile[7][4]->get_piece_color() == 0) && (main_tile[7][5]->get_piece() == 1) && (main_tile[7][5]->get_piece_color() == 0) && (main_tile[7][6]->get_piece() == 1) && (main_tile[7][6]->get_piece_color() == 0) && (main_tile[7][7]->get_piece() == 1) && (main_tile[7][7]->get_piece_color() == 0))
     {
         white_pawns_wins = true;
     }

@@ -61,23 +61,13 @@ void choose_movement::finds_movements(tile *tile2[8][8])
     }
 
     for (int i=0; i<8; i++)
-    //I omits the last row on the chessboard, because computer shouldn't choose movements involving backflow movements
+    //i omits the last row on the chessboard, because computer shouldn't choose movements involving backflow movements
     {
         for (int j=0; j<7; j++)
         {
-            if (i%2==0)
+            if ((!tile2[i][j]->get_piece()) || (tile2[i][j]->get_piece_color() != 0))
             {
-                if ((j%2==0) || (!tile2[i][j]->get_piece()) || (tile2[i][j]->get_piece_color() != 0))
-                {
-                    continue;
-                }
-            }
-            else
-            {
-                if ((j%2==1) || (!tile2[i][j]->get_piece()) || (tile2[i][j]->get_piece_color() != 0))
-                {
-                    continue;
-                }
+                continue;
             }
 
             if ((i == 6) && (tile2[i][j]->get_piece_color() == 0))
