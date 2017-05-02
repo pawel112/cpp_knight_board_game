@@ -120,9 +120,6 @@ void validation::orange()
 {
     for (int i=0; i<m_window->get_possible_number_of_moves(); i++)
     {
-        if (m_window->get_field_numbers_of_possible_moves(i) != 0)
-        {
-            main_tile[m_window->get_field_numbers_of_possible_moves(i)/8][m_window->get_field_numbers_of_possible_moves(i)%8]->setStyleSheet ("QLabel {background-color: orange;}");
-        }
+        main_tile[m_window->get_field_numbers_of_possible_moves(i)/8][m_window->get_field_numbers_of_possible_moves(i)%8]->setStyleSheet ("QLabel {background-color: orange;}");
     }
 }

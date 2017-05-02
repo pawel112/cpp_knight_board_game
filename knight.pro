@@ -34,8 +34,7 @@ HEADERS  += \
     about_window.h \
     choose_language.h \
     rules_window.h \
-    main_window.h \
-    main_window
+    main_window.h
 
 FORMS    += \
     about_window.ui \
