@@ -46,9 +46,9 @@ public:
     void set_player_1_points (std::string points);
     void set_player_2_points (std::string points);
     void set_play_with_computer_button (bool choise);
-    void reomve_orange();
+    void remove_orange();
     void remove_blue();
-    void chess_board (QWidget *base_widget, tile *tile2[8][8]);
+    void chess_board (QWidget *base_widget, tile *main_tile[8][8]);
     void set_pawns();
     void validate (tile *temp, int c);
     void end_turn();

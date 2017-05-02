@@ -309,7 +309,7 @@ std::string main_window::get_player_2_points ()
     return ui->player_2_points->text().toStdString();
 }
 
-void main_window::reomve_orange ()
+void main_window::remove_orange ()
 {
     for (int i=0; i<possible_number_of_moves; i++)
     {
@@ -328,7 +328,7 @@ void main_window::remove_blue ()
     }
 }
 
-void main_window::chess_board (QWidget *base_widget, tile *tile2[8][8])
+void main_window::chess_board (QWidget *base_widget, tile *main_tile[8][8])
 {
     QLabel *outLabel = new QLabel (base_widget);
     outLabel->setGeometry (682, 55, 20, 512);
@@ -352,14 +352,14 @@ void main_window::chess_board (QWidget *base_widget, tile *tile2[8][8])
         hor = 170;
         for (int j=0; j<8; j++)
         {
-            tile2[i][j] = new tile (base_widget);
-            tile2[i][j]->set_tile_color ((i+j)%2);
-            tile2[i][j]->set_piece (0);
-            tile2[i][j]->set_row (i);
-            tile2[i][j]->set_col (j);
-            tile2[i][j]->set_tile_num (k++);
-            tile2[i][j]->tile_display ();
-            tile2[i][j]->setGeometry (hor, ver, 64, 64);
+            main_tile[i][j] = new tile (base_widget);
+            main_tile[i][j]->set_tile_color ((i+j)%2);
+            main_tile[i][j]->set_piece (0);
+            main_tile[i][j]->set_row (i);
+            main_tile[i][j]->set_col (j);
+            main_tile[i][j]->set_tile_num (k++);
+            main_tile[i][j]->tile_display ();
+            main_tile[i][j]->setGeometry (hor, ver, 64, 64);
             hor += 64;
         }
         ver += 64;
@@ -446,7 +446,7 @@ void main_window::validate (tile *temp, int c)
         if (temp->get_tile_num() == clicked_field_tile->get_tile_num())
         {
             clicked_field_tile->tile_display ();
-            reomve_orange ();
+            remove_orange ();
             possible_number_of_moves = 0;
             clicked_fields = false;
         }
@@ -469,7 +469,7 @@ void main_window::validate (tile *temp, int c)
 
                 ret_value = field_to_valid->check (clicked_field_tile);
 
-                reomve_orange ();
+                remove_orange ();
                 possible_number_of_moves = 0;
 
                 if (abs (temp->get_row() - jump_from_field[0]) == 1)
@@ -510,7 +510,7 @@ void main_window::end_turn()
         }
     }
 
-    reomve_orange ();
+    remove_orange ();
     possible_number_of_moves = 0;
     clicked_fields = false;
 

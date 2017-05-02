@@ -53,7 +53,7 @@ void choose_movement::clear_queue ()
     }
 }
 
-void choose_movement::finds_movements(tile *tile2[8][8])
+void choose_movement::finds_movements(tile *main_tile[8][8])
 {
     if (settings::get_game_started() == false)
     {
@@ -65,141 +65,141 @@ void choose_movement::finds_movements(tile *tile2[8][8])
     {
         for (int j=0; j<7; j++)
         {
-            if ((!tile2[i][j]->get_piece()) || (tile2[i][j]->get_piece_color() != 0))
+            if ((!main_tile[i][j]->get_piece()) || (main_tile[i][j]->get_piece_color() != 0))
             {
                 continue;
             }
 
-            if ((i == 6) && (tile2[i][j]->get_piece_color() == 0))
+            if ((i == 6) && (main_tile[i][j]->get_piece_color() == 0))
             {
                 continue;
             }
 
             //1. weight 1
             //up, left
-            if (tile2[i][j]->get_row()-1 >= 0 && tile2[i][j]->get_col()-1 >= 0 && !tile2[tile2[i][j]->get_row()-1][tile2[i][j]->get_col()-1]->get_piece())
+            if (main_tile[i][j]->get_row()-1 >= 0 && main_tile[i][j]->get_col()-1 >= 0 && !main_tile[main_tile[i][j]->get_row()-1][main_tile[i][j]->get_col()-1]->get_piece())
             {
-                m_window->set_of_moves->add_movement(movement(-1, tile2[i][j]->get_row(), tile2[i][j]->get_col(), tile2[i][j]->get_row()-1, tile2[i][j]->get_col()-1));
+                m_window->set_of_moves->add_movement(movement(-1, main_tile[i][j]->get_row(), main_tile[i][j]->get_col(), main_tile[i][j]->get_row()-1, main_tile[i][j]->get_col()-1));
             }
 
             //up, right
-            if (tile2[i][j]->get_row()-1 >= 0 && tile2[i][j]->get_col()+1 <= 7 && !tile2[tile2[i][j]->get_row()-1][tile2[i][j]->get_col()+1]->get_piece())
+            if (main_tile[i][j]->get_row()-1 >= 0 && main_tile[i][j]->get_col()+1 <= 7 && !main_tile[main_tile[i][j]->get_row()-1][main_tile[i][j]->get_col()+1]->get_piece())
             {
-                m_window->set_of_moves->add_movement(movement(-1, tile2[i][j]->get_row(), tile2[i][j]->get_col(), tile2[i][j]->get_row()-1, tile2[i][j]->get_col()+1));
+                m_window->set_of_moves->add_movement(movement(-1, main_tile[i][j]->get_row(), main_tile[i][j]->get_col(), main_tile[i][j]->get_row()-1, main_tile[i][j]->get_col()+1));
             }
 
             //down, left
-            if (tile2[i][j]->get_row()+1 <= 7 && tile2[i][j]->get_col()-1 >= 0 && !tile2[tile2[i][j]->get_row()+1][tile2[i][j]->get_col()-1]->get_piece())
+            if (main_tile[i][j]->get_row()+1 <= 7 && main_tile[i][j]->get_col()-1 >= 0 && !main_tile[main_tile[i][j]->get_row()+1][main_tile[i][j]->get_col()-1]->get_piece())
             {
-                m_window->set_of_moves->add_movement(movement(1, tile2[i][j]->get_row(), tile2[i][j]->get_col(), tile2[i][j]->get_row()+1, tile2[i][j]->get_col()-1));
+                m_window->set_of_moves->add_movement(movement(1, main_tile[i][j]->get_row(), main_tile[i][j]->get_col(), main_tile[i][j]->get_row()+1, main_tile[i][j]->get_col()-1));
             }
 
             //down, right
-            if (tile2[i][j]->get_row()+1 <= 7 && tile2[i][j]->get_col()+1 <= 7 && !tile2[tile2[i][j]->get_row()+1][tile2[i][j]->get_col()+1]->get_piece())
+            if (main_tile[i][j]->get_row()+1 <= 7 && main_tile[i][j]->get_col()+1 <= 7 && !main_tile[main_tile[i][j]->get_row()+1][main_tile[i][j]->get_col()+1]->get_piece())
             {
-                m_window->set_of_moves->add_movement(movement(1, tile2[i][j]->get_row(), tile2[i][j]->get_col(), tile2[i][j]->get_row()+1, tile2[i][j]->get_col()+1));
+                m_window->set_of_moves->add_movement(movement(1, main_tile[i][j]->get_row(), main_tile[i][j]->get_col(), main_tile[i][j]->get_row()+1, main_tile[i][j]->get_col()+1));
             }
 
 
             //2. jumps - weight 2
             //down right x2
-            if (tile2[i][j]->get_row()+2 <= 7 && tile2[i][j]->get_col()+2 <= 7 && tile2[tile2[i][j]->get_row()+1][tile2[i][j]->get_col()+1]->get_piece() && !tile2[tile2[i][j]->get_row()+2][tile2[i][j]->get_col()+2]->get_piece())
+            if (main_tile[i][j]->get_row()+2 <= 7 && main_tile[i][j]->get_col()+2 <= 7 && main_tile[main_tile[i][j]->get_row()+1][main_tile[i][j]->get_col()+1]->get_piece() && !main_tile[main_tile[i][j]->get_row()+2][main_tile[i][j]->get_col()+2]->get_piece())
             {
-                m_window->set_of_moves->add_movement(movement(2, tile2[i][j]->get_row(), tile2[i][j]->get_col(), tile2[i][j]->get_row()+2, tile2[i][j]->get_col()+2));
+                m_window->set_of_moves->add_movement(movement(2, main_tile[i][j]->get_row(), main_tile[i][j]->get_col(), main_tile[i][j]->get_row()+2, main_tile[i][j]->get_col()+2));
             }
 
             //down left x2
-            if (tile2[i][j]->get_row()+2 <= 7 && tile2[i][j]->get_col()-2 >= 0 && tile2[tile2[i][j]->get_row()+1][tile2[i][j]->get_col()-1]->get_piece() && !tile2[tile2[i][j]->get_row()+2][tile2[i][j]->get_col()-2]->get_piece())
+            if (main_tile[i][j]->get_row()+2 <= 7 && main_tile[i][j]->get_col()-2 >= 0 && main_tile[main_tile[i][j]->get_row()+1][main_tile[i][j]->get_col()-1]->get_piece() && !main_tile[main_tile[i][j]->get_row()+2][main_tile[i][j]->get_col()-2]->get_piece())
             {
-                m_window->set_of_moves->add_movement(movement(2, tile2[i][j]->get_row(), tile2[i][j]->get_col(), tile2[i][j]->get_row()+2, tile2[i][j]->get_col()-2));
+                m_window->set_of_moves->add_movement(movement(2, main_tile[i][j]->get_row(), main_tile[i][j]->get_col(), main_tile[i][j]->get_row()+2, main_tile[i][j]->get_col()-2));
             }
 
             //up right x2
-            if (tile2[i][j]->get_row()-2 >= 0 && tile2[i][j]->get_col()+2 <= 7 && tile2[tile2[i][j]->get_row()-1][tile2[i][j]->get_col()+1]->get_piece() && !tile2[tile2[i][j]->get_row()-2][tile2[i][j]->get_col()+2]->get_piece())
+            if (main_tile[i][j]->get_row()-2 >= 0 && main_tile[i][j]->get_col()+2 <= 7 && main_tile[main_tile[i][j]->get_row()-1][main_tile[i][j]->get_col()+1]->get_piece() && !main_tile[main_tile[i][j]->get_row()-2][main_tile[i][j]->get_col()+2]->get_piece())
             {
-                m_window->set_of_moves->add_movement(movement(-2, tile2[i][j]->get_row(), tile2[i][j]->get_col(), tile2[i][j]->get_row()-2, tile2[i][j]->get_col()+2));
+                m_window->set_of_moves->add_movement(movement(-2, main_tile[i][j]->get_row(), main_tile[i][j]->get_col(), main_tile[i][j]->get_row()-2, main_tile[i][j]->get_col()+2));
             }
 
             //up left x2
-            if (tile2[i][j]->get_row()-2 >= 0 && tile2[i][j]->get_col()-2 >= 0 && tile2[tile2[i][j]->get_row()-1][tile2[i][j]->get_col()-1]->get_piece() && !tile2[tile2[i][j]->get_row()-2][tile2[i][j]->get_col()-2]->get_piece())
+            if (main_tile[i][j]->get_row()-2 >= 0 && main_tile[i][j]->get_col()-2 >= 0 && main_tile[main_tile[i][j]->get_row()-1][main_tile[i][j]->get_col()-1]->get_piece() && !main_tile[main_tile[i][j]->get_row()-2][main_tile[i][j]->get_col()-2]->get_piece())
             {
-                m_window->set_of_moves->add_movement(movement(-2, tile2[i][j]->get_row(), tile2[i][j]->get_col(), tile2[i][j]->get_row()-2, tile2[i][j]->get_col()-2));
+                m_window->set_of_moves->add_movement(movement(-2, main_tile[i][j]->get_row(), main_tile[i][j]->get_col(), main_tile[i][j]->get_row()-2, main_tile[i][j]->get_col()-2));
             }
 
 
             //3. jumps - weight 4 (skipping movements weights below zero)
             //down right x4
-            if (tile2[i][j]->get_row()+4 <= 7 && tile2[i][j]->get_col()+4 <= 7 && tile2[tile2[i][j]->get_row()+1][tile2[i][j]->get_col()+1]->get_piece() && !tile2[tile2[i][j]->get_row()+2][tile2[i][j]->get_col()+2]->get_piece() && tile2[tile2[i][j]->get_row()+3][tile2[i][j]->get_col()+3]->get_piece() && !tile2[tile2[i][j]->get_row()+4][tile2[i][j]->get_col()+4]->get_piece())
+            if (main_tile[i][j]->get_row()+4 <= 7 && main_tile[i][j]->get_col()+4 <= 7 && main_tile[main_tile[i][j]->get_row()+1][main_tile[i][j]->get_col()+1]->get_piece() && !main_tile[main_tile[i][j]->get_row()+2][main_tile[i][j]->get_col()+2]->get_piece() && main_tile[main_tile[i][j]->get_row()+3][main_tile[i][j]->get_col()+3]->get_piece() && !main_tile[main_tile[i][j]->get_row()+4][main_tile[i][j]->get_col()+4]->get_piece())
             {
-                m_window->set_of_moves->add_movement(movement(4, tile2[i][j]->get_row(), tile2[i][j]->get_col(), tile2[i][j]->get_row()+4, tile2[i][j]->get_col()+4, tile2[i][j]->get_row()+2, tile2[i][j]->get_col()+2));
+                m_window->set_of_moves->add_movement(movement(4, main_tile[i][j]->get_row(), main_tile[i][j]->get_col(), main_tile[i][j]->get_row()+4, main_tile[i][j]->get_col()+4, main_tile[i][j]->get_row()+2, main_tile[i][j]->get_col()+2));
             }
 
             //down left x4
-            if (tile2[i][j]->get_row()+4 <= 7 && tile2[i][j]->get_col()-4 >= 0 && tile2[tile2[i][j]->get_row()+1][tile2[i][j]->get_col()-1]->get_piece() && !tile2[tile2[i][j]->get_row()+2][tile2[i][j]->get_col()-2]->get_piece() && tile2[tile2[i][j]->get_row()+3][tile2[i][j]->get_col()-3]->get_piece() && !tile2[tile2[i][j]->get_row()+4][tile2[i][j]->get_col()-4]->get_piece())
+            if (main_tile[i][j]->get_row()+4 <= 7 && main_tile[i][j]->get_col()-4 >= 0 && main_tile[main_tile[i][j]->get_row()+1][main_tile[i][j]->get_col()-1]->get_piece() && !main_tile[main_tile[i][j]->get_row()+2][main_tile[i][j]->get_col()-2]->get_piece() && main_tile[main_tile[i][j]->get_row()+3][main_tile[i][j]->get_col()-3]->get_piece() && !main_tile[main_tile[i][j]->get_row()+4][main_tile[i][j]->get_col()-4]->get_piece())
             {
-                m_window->set_of_moves->add_movement(movement(4, tile2[i][j]->get_row(), tile2[i][j]->get_col(), tile2[i][j]->get_row()+4, tile2[i][j]->get_col()-4, tile2[i][j]->get_row()+2, tile2[i][j]->get_col()-2));
+                m_window->set_of_moves->add_movement(movement(4, main_tile[i][j]->get_row(), main_tile[i][j]->get_col(), main_tile[i][j]->get_row()+4, main_tile[i][j]->get_col()-4, main_tile[i][j]->get_row()+2, main_tile[i][j]->get_col()-2));
             }
 
             //down right x2, down left x2
-            if (tile2[i][j]->get_row()+4 <= 7 && tile2[i][j]->get_col()+2 <= 7 && tile2[tile2[i][j]->get_row()+1][tile2[i][j]->get_col()+1]->get_piece() && !tile2[tile2[i][j]->get_row()+2][tile2[i][j]->get_col()+2]->get_piece() && tile2[tile2[i][j]->get_row()+3][tile2[i][j]->get_col()+1]->get_piece() && !tile2[tile2[i][j]->get_row()+4][tile2[i][j]->get_col()]->get_piece())
+            if (main_tile[i][j]->get_row()+4 <= 7 && main_tile[i][j]->get_col()+2 <= 7 && main_tile[main_tile[i][j]->get_row()+1][main_tile[i][j]->get_col()+1]->get_piece() && !main_tile[main_tile[i][j]->get_row()+2][main_tile[i][j]->get_col()+2]->get_piece() && main_tile[main_tile[i][j]->get_row()+3][main_tile[i][j]->get_col()+1]->get_piece() && !main_tile[main_tile[i][j]->get_row()+4][main_tile[i][j]->get_col()]->get_piece())
             {
-                m_window->set_of_moves->add_movement(movement(4, tile2[i][j]->get_row(), tile2[i][j]->get_col(), tile2[i][j]->get_row()+4, tile2[i][j]->get_col(), tile2[i][j]->get_row()+2, tile2[i][j]->get_col()+2));
+                m_window->set_of_moves->add_movement(movement(4, main_tile[i][j]->get_row(), main_tile[i][j]->get_col(), main_tile[i][j]->get_row()+4, main_tile[i][j]->get_col(), main_tile[i][j]->get_row()+2, main_tile[i][j]->get_col()+2));
             }
 
             //down left x2, down right x2
-            if (tile2[i][j]->get_row()+4 <= 7 && tile2[i][j]->get_col()-2 >= 0 && tile2[tile2[i][j]->get_row()+1][tile2[i][j]->get_col()-1]->get_piece() && !tile2[tile2[i][j]->get_row()+2][tile2[i][j]->get_col()-2]->get_piece() && tile2[tile2[i][j]->get_row()+3][tile2[i][j]->get_col()-1]->get_piece() && !tile2[tile2[i][j]->get_row()+4][tile2[i][j]->get_col()]->get_piece())
+            if (main_tile[i][j]->get_row()+4 <= 7 && main_tile[i][j]->get_col()-2 >= 0 && main_tile[main_tile[i][j]->get_row()+1][main_tile[i][j]->get_col()-1]->get_piece() && !main_tile[main_tile[i][j]->get_row()+2][main_tile[i][j]->get_col()-2]->get_piece() && main_tile[main_tile[i][j]->get_row()+3][main_tile[i][j]->get_col()-1]->get_piece() && !main_tile[main_tile[i][j]->get_row()+4][main_tile[i][j]->get_col()]->get_piece())
             {
-                m_window->set_of_moves->add_movement(movement(4, tile2[i][j]->get_row(), tile2[i][j]->get_col(), tile2[i][j]->get_row()+4, tile2[i][j]->get_col(), tile2[i][j]->get_row()+2, tile2[i][j]->get_col()-2));
+                m_window->set_of_moves->add_movement(movement(4, main_tile[i][j]->get_row(), main_tile[i][j]->get_col(), main_tile[i][j]->get_row()+4, main_tile[i][j]->get_col(), main_tile[i][j]->get_row()+2, main_tile[i][j]->get_col()-2));
             }
 
 
             //4. jumps - weight 6 (skipping movements weights below zero)
             //down right x6
-            if (tile2[i][j]->get_row()+6 <= 7 && tile2[i][j]->get_col()+6 <= 7 && tile2[tile2[i][j]->get_row()+1][tile2[i][j]->get_col()+1]->get_piece() && !tile2[tile2[i][j]->get_row()+2][tile2[i][j]->get_col()+2]->get_piece() && tile2[tile2[i][j]->get_row()+3][tile2[i][j]->get_col()+3]->get_piece() && !tile2[tile2[i][j]->get_row()+4][tile2[i][j]->get_col()+4]->get_piece() && tile2[tile2[i][j]->get_row()+5][tile2[i][j]->get_col()+5]->get_piece() && !tile2[tile2[i][j]->get_row()+6][tile2[i][j]->get_col()+6]->get_piece())
+            if (main_tile[i][j]->get_row()+6 <= 7 && main_tile[i][j]->get_col()+6 <= 7 && main_tile[main_tile[i][j]->get_row()+1][main_tile[i][j]->get_col()+1]->get_piece() && !main_tile[main_tile[i][j]->get_row()+2][main_tile[i][j]->get_col()+2]->get_piece() && main_tile[main_tile[i][j]->get_row()+3][main_tile[i][j]->get_col()+3]->get_piece() && !main_tile[main_tile[i][j]->get_row()+4][main_tile[i][j]->get_col()+4]->get_piece() && main_tile[main_tile[i][j]->get_row()+5][main_tile[i][j]->get_col()+5]->get_piece() && !main_tile[main_tile[i][j]->get_row()+6][main_tile[i][j]->get_col()+6]->get_piece())
             {
-                m_window->set_of_moves->add_movement(movement(6, tile2[i][j]->get_row(), tile2[i][j]->get_col(), tile2[i][j]->get_row()+6, tile2[i][j]->get_col()+6, tile2[i][j]->get_row()+2, tile2[i][j]->get_col()+2, tile2[i][j]->get_row()+4, tile2[i][j]->get_col()+4));
+                m_window->set_of_moves->add_movement(movement(6, main_tile[i][j]->get_row(), main_tile[i][j]->get_col(), main_tile[i][j]->get_row()+6, main_tile[i][j]->get_col()+6, main_tile[i][j]->get_row()+2, main_tile[i][j]->get_col()+2, main_tile[i][j]->get_row()+4, main_tile[i][j]->get_col()+4));
             }
 
             //down left x6
-            if (tile2[i][j]->get_row()+6 <= 7 && tile2[i][j]->get_col()-6 >= 0 && tile2[tile2[i][j]->get_row()+1][tile2[i][j]->get_col()-1]->get_piece() && !tile2[tile2[i][j]->get_row()+2][tile2[i][j]->get_col()-2]->get_piece() && tile2[tile2[i][j]->get_row()+3][tile2[i][j]->get_col()-3]->get_piece() && !tile2[tile2[i][j]->get_row()+4][tile2[i][j]->get_col()-4]->get_piece() && tile2[tile2[i][j]->get_row()+5][tile2[i][j]->get_col()-5]->get_piece() && !tile2[tile2[i][j]->get_row()+6][tile2[i][j]->get_col()-6]->get_piece())
+            if (main_tile[i][j]->get_row()+6 <= 7 && main_tile[i][j]->get_col()-6 >= 0 && main_tile[main_tile[i][j]->get_row()+1][main_tile[i][j]->get_col()-1]->get_piece() && !main_tile[main_tile[i][j]->get_row()+2][main_tile[i][j]->get_col()-2]->get_piece() && main_tile[main_tile[i][j]->get_row()+3][main_tile[i][j]->get_col()-3]->get_piece() && !main_tile[main_tile[i][j]->get_row()+4][main_tile[i][j]->get_col()-4]->get_piece() && main_tile[main_tile[i][j]->get_row()+5][main_tile[i][j]->get_col()-5]->get_piece() && !main_tile[main_tile[i][j]->get_row()+6][main_tile[i][j]->get_col()-6]->get_piece())
             {
-                m_window->set_of_moves->add_movement(movement(6, tile2[i][j]->get_row(), tile2[i][j]->get_col(), tile2[i][j]->get_row()+6, tile2[i][j]->get_col()-6, tile2[i][j]->get_row()+2, tile2[i][j]->get_col()-2, tile2[i][j]->get_row()+4, tile2[i][j]->get_col()-4));
+                m_window->set_of_moves->add_movement(movement(6, main_tile[i][j]->get_row(), main_tile[i][j]->get_col(), main_tile[i][j]->get_row()+6, main_tile[i][j]->get_col()-6, main_tile[i][j]->get_row()+2, main_tile[i][j]->get_col()-2, main_tile[i][j]->get_row()+4, main_tile[i][j]->get_col()-4));
             }
 
             //down right x4, down left x2
-            if (tile2[i][j]->get_row()+6 <= 7 && tile2[i][j]->get_col()+4 <= 7 && tile2[tile2[i][j]->get_row()+1][tile2[i][j]->get_col()+1]->get_piece() && !tile2[tile2[i][j]->get_row()+2][tile2[i][j]->get_col()+2]->get_piece() && tile2[tile2[i][j]->get_row()+3][tile2[i][j]->get_col()+3]->get_piece() && !tile2[tile2[i][j]->get_row()+4][tile2[i][j]->get_col()+4]->get_piece() && tile2[tile2[i][j]->get_row()+5][tile2[i][j]->get_col()+3]->get_piece() && !tile2[tile2[i][j]->get_row()+6][tile2[i][j]->get_col()+2]->get_piece())
+            if (main_tile[i][j]->get_row()+6 <= 7 && main_tile[i][j]->get_col()+4 <= 7 && main_tile[main_tile[i][j]->get_row()+1][main_tile[i][j]->get_col()+1]->get_piece() && !main_tile[main_tile[i][j]->get_row()+2][main_tile[i][j]->get_col()+2]->get_piece() && main_tile[main_tile[i][j]->get_row()+3][main_tile[i][j]->get_col()+3]->get_piece() && !main_tile[main_tile[i][j]->get_row()+4][main_tile[i][j]->get_col()+4]->get_piece() && main_tile[main_tile[i][j]->get_row()+5][main_tile[i][j]->get_col()+3]->get_piece() && !main_tile[main_tile[i][j]->get_row()+6][main_tile[i][j]->get_col()+2]->get_piece())
             {
-                m_window->set_of_moves->add_movement(movement(6, tile2[i][j]->get_row(), tile2[i][j]->get_col(), tile2[i][j]->get_row()+6, tile2[i][j]->get_col()+2, tile2[i][j]->get_row()+2, tile2[i][j]->get_col()+2, tile2[i][j]->get_row()+4, tile2[i][j]->get_col()+4));
+                m_window->set_of_moves->add_movement(movement(6, main_tile[i][j]->get_row(), main_tile[i][j]->get_col(), main_tile[i][j]->get_row()+6, main_tile[i][j]->get_col()+2, main_tile[i][j]->get_row()+2, main_tile[i][j]->get_col()+2, main_tile[i][j]->get_row()+4, main_tile[i][j]->get_col()+4));
             }
 
             //down left x4, down right x2
-            if (tile2[i][j]->get_row()+6 <= 7 && tile2[i][j]->get_col()-6 >= 0 && tile2[tile2[i][j]->get_row()+1][tile2[i][j]->get_col()-1]->get_piece() && !tile2[tile2[i][j]->get_row()+2][tile2[i][j]->get_col()-2]->get_piece() && tile2[tile2[i][j]->get_row()+3][tile2[i][j]->get_col()-3]->get_piece() && !tile2[tile2[i][j]->get_row()+4][tile2[i][j]->get_col()-4]->get_piece() && tile2[tile2[i][j]->get_row()+5][tile2[i][j]->get_col()-5]->get_piece() && !tile2[tile2[i][j]->get_row()+6][tile2[i][j]->get_col()-6]->get_piece())
+            if (main_tile[i][j]->get_row()+6 <= 7 && main_tile[i][j]->get_col()-4 >= 0 && main_tile[main_tile[i][j]->get_row()+1][main_tile[i][j]->get_col()-1]->get_piece() && !main_tile[main_tile[i][j]->get_row()+2][main_tile[i][j]->get_col()-2]->get_piece() && main_tile[main_tile[i][j]->get_row()+3][main_tile[i][j]->get_col()-3]->get_piece() && !main_tile[main_tile[i][j]->get_row()+4][main_tile[i][j]->get_col()-4]->get_piece() && main_tile[main_tile[i][j]->get_row()+5][main_tile[i][j]->get_col()-3]->get_piece() && !main_tile[main_tile[i][j]->get_row()+6][main_tile[i][j]->get_col()-2]->get_piece())
             {
-                m_window->set_of_moves->add_movement(movement(6, tile2[i][j]->get_row(), tile2[i][j]->get_col(), tile2[i][j]->get_row()+6, tile2[i][j]->get_col()-6, tile2[i][j]->get_row()+2, tile2[i][j]->get_col()-2, tile2[i][j]->get_row()+4, tile2[i][j]->get_col()-4));
+                m_window->set_of_moves->add_movement(movement(6, main_tile[i][j]->get_row(), main_tile[i][j]->get_col(), main_tile[i][j]->get_row()+6, main_tile[i][j]->get_col()-2, main_tile[i][j]->get_row()+2, main_tile[i][j]->get_col()-2, main_tile[i][j]->get_row()+4, main_tile[i][j]->get_col()-4));
             }
 
             //down right x2, down left x4
-            if (tile2[i][j]->get_row()+6 <= 7 && tile2[i][j]->get_col()+2 <= 7 && tile2[i][j]->get_col()-2 >= 0 && tile2[tile2[i][j]->get_row()+1][tile2[i][j]->get_col()+1]->get_piece() && !tile2[tile2[i][j]->get_row()+2][tile2[i][j]->get_col()+2]->get_piece() && tile2[tile2[i][j]->get_row()+3][tile2[i][j]->get_col()+1]->get_piece() && !tile2[tile2[i][j]->get_row()+4][tile2[i][j]->get_col()]->get_piece() && tile2[tile2[i][j]->get_row()+5][tile2[i][j]->get_col()-1]->get_piece() && !tile2[tile2[i][j]->get_row()+6][tile2[i][j]->get_col()-2]->get_piece())
+            if (main_tile[i][j]->get_row()+6 <= 7 && main_tile[i][j]->get_col()+2 <= 7 && main_tile[i][j]->get_col()-2 >= 0 && main_tile[main_tile[i][j]->get_row()+1][main_tile[i][j]->get_col()+1]->get_piece() && !main_tile[main_tile[i][j]->get_row()+2][main_tile[i][j]->get_col()+2]->get_piece() && main_tile[main_tile[i][j]->get_row()+3][main_tile[i][j]->get_col()+1]->get_piece() && !main_tile[main_tile[i][j]->get_row()+4][main_tile[i][j]->get_col()]->get_piece() && main_tile[main_tile[i][j]->get_row()+5][main_tile[i][j]->get_col()-1]->get_piece() && !main_tile[main_tile[i][j]->get_row()+6][main_tile[i][j]->get_col()-2]->get_piece())
             {
-                m_window->set_of_moves->add_movement(movement(6, tile2[i][j]->get_row(), tile2[i][j]->get_col(), tile2[i][j]->get_row()+6, tile2[i][j]->get_col()-2, tile2[i][j]->get_row()+2, tile2[i][j]->get_col()+2, tile2[i][j]->get_row()+4, tile2[i][j]->get_col()));
+                m_window->set_of_moves->add_movement(movement(6, main_tile[i][j]->get_row(), main_tile[i][j]->get_col(), main_tile[i][j]->get_row()+6, main_tile[i][j]->get_col()-2, main_tile[i][j]->get_row()+2, main_tile[i][j]->get_col()+2, main_tile[i][j]->get_row()+4, main_tile[i][j]->get_col()));
             }
 
             //down left x2, down right x4
-            if (tile2[i][j]->get_row()+6 <= 7 && tile2[i][j]->get_col()+2 <= 7 && tile2[i][j]->get_col()-2 >= 0 && tile2[tile2[i][j]->get_row()+1][tile2[i][j]->get_col()-1]->get_piece() && !tile2[tile2[i][j]->get_row()+2][tile2[i][j]->get_col()-2]->get_piece() && tile2[tile2[i][j]->get_row()+3][tile2[i][j]->get_col()-1]->get_piece() && !tile2[tile2[i][j]->get_row()+4][tile2[i][j]->get_col()]->get_piece() && tile2[tile2[i][j]->get_row()+5][tile2[i][j]->get_col()+1]->get_piece() && !tile2[tile2[i][j]->get_row()+6][tile2[i][j]->get_col()+2]->get_piece())
+            if (main_tile[i][j]->get_row()+6 <= 7 && main_tile[i][j]->get_col()+2 <= 7 && main_tile[i][j]->get_col()-2 >= 0 && main_tile[main_tile[i][j]->get_row()+1][main_tile[i][j]->get_col()-1]->get_piece() && !main_tile[main_tile[i][j]->get_row()+2][main_tile[i][j]->get_col()-2]->get_piece() && main_tile[main_tile[i][j]->get_row()+3][main_tile[i][j]->get_col()-1]->get_piece() && !main_tile[main_tile[i][j]->get_row()+4][main_tile[i][j]->get_col()]->get_piece() && main_tile[main_tile[i][j]->get_row()+5][main_tile[i][j]->get_col()+1]->get_piece() && !main_tile[main_tile[i][j]->get_row()+6][main_tile[i][j]->get_col()+2]->get_piece())
             {
-                m_window->set_of_moves->add_movement(movement(6, tile2[i][j]->get_row(), tile2[i][j]->get_col(), tile2[i][j]->get_row()+6, tile2[i][j]->get_col()+2, tile2[i][j]->get_row()+2, tile2[i][j]->get_col()-2, tile2[i][j]->get_row()+4, tile2[i][j]->get_col()));
+                m_window->set_of_moves->add_movement(movement(6, main_tile[i][j]->get_row(), main_tile[i][j]->get_col(), main_tile[i][j]->get_row()+6, main_tile[i][j]->get_col()+2, main_tile[i][j]->get_row()+2, main_tile[i][j]->get_col()-2, main_tile[i][j]->get_row()+4, main_tile[i][j]->get_col()));
             }
 
             //down right x2, down left x2, down right x2
-            if (tile2[i][j]->get_row()+6 <= 7 && tile2[i][j]->get_col()+2 <= 7 && tile2[tile2[i][j]->get_row()+1][tile2[i][j]->get_col()+1]->get_piece() && !tile2[tile2[i][j]->get_row()+2][tile2[i][j]->get_col()+2]->get_piece() && tile2[tile2[i][j]->get_row()+3][tile2[i][j]->get_col()+1]->get_piece() && !tile2[tile2[i][j]->get_row()+4][tile2[i][j]->get_col()]->get_piece() && tile2[tile2[i][j]->get_row()+5][tile2[i][j]->get_col()+1]->get_piece() && !tile2[tile2[i][j]->get_row()+6][tile2[i][j]->get_col()+2]->get_piece())
+            if (main_tile[i][j]->get_row()+6 <= 7 && main_tile[i][j]->get_col()+2 <= 7 && main_tile[main_tile[i][j]->get_row()+1][main_tile[i][j]->get_col()+1]->get_piece() && !main_tile[main_tile[i][j]->get_row()+2][main_tile[i][j]->get_col()+2]->get_piece() && main_tile[main_tile[i][j]->get_row()+3][main_tile[i][j]->get_col()+1]->get_piece() && !main_tile[main_tile[i][j]->get_row()+4][main_tile[i][j]->get_col()]->get_piece() && main_tile[main_tile[i][j]->get_row()+5][main_tile[i][j]->get_col()+1]->get_piece() && !main_tile[main_tile[i][j]->get_row()+6][main_tile[i][j]->get_col()+2]->get_piece())
             {
-                m_window->set_of_moves->add_movement(movement(6, tile2[i][j]->get_row(), tile2[i][j]->get_col(), tile2[i][j]->get_row()+6, tile2[i][j]->get_col()+2, tile2[i][j]->get_row()+2, tile2[i][j]->get_col()+2, tile2[i][j]->get_row()+4, tile2[i][j]->get_col()));
+                m_window->set_of_moves->add_movement(movement(6, main_tile[i][j]->get_row(), main_tile[i][j]->get_col(), main_tile[i][j]->get_row()+6, main_tile[i][j]->get_col()+2, main_tile[i][j]->get_row()+2, main_tile[i][j]->get_col()+2, main_tile[i][j]->get_row()+4, main_tile[i][j]->get_col()));
             }
 
             //down left x2, down right x2, down left x2
-            if (tile2[i][j]->get_row()+6 <= 7 && tile2[i][j]->get_col()-2 >= 0 && tile2[tile2[i][j]->get_row()+1][tile2[i][j]->get_col()-1]->get_piece() && !tile2[tile2[i][j]->get_row()+2][tile2[i][j]->get_col()-2]->get_piece() && tile2[tile2[i][j]->get_row()+3][tile2[i][j]->get_col()-1]->get_piece() && !tile2[tile2[i][j]->get_row()+4][tile2[i][j]->get_col()]->get_piece() && tile2[tile2[i][j]->get_row()+5][tile2[i][j]->get_col()-1]->get_piece() && !tile2[tile2[i][j]->get_row()+6][tile2[i][j]->get_col()-2]->get_piece())
+            if (main_tile[i][j]->get_row()+6 <= 7 && main_tile[i][j]->get_col()-2 >= 0 && main_tile[main_tile[i][j]->get_row()+1][main_tile[i][j]->get_col()-1]->get_piece() && !main_tile[main_tile[i][j]->get_row()+2][main_tile[i][j]->get_col()-2]->get_piece() && main_tile[main_tile[i][j]->get_row()+3][main_tile[i][j]->get_col()-1]->get_piece() && !main_tile[main_tile[i][j]->get_row()+4][main_tile[i][j]->get_col()]->get_piece() && main_tile[main_tile[i][j]->get_row()+5][main_tile[i][j]->get_col()-1]->get_piece() && !main_tile[main_tile[i][j]->get_row()+6][main_tile[i][j]->get_col()-2]->get_piece())
             {
-                m_window->set_of_moves->add_movement(movement(6, tile2[i][j]->get_row(), tile2[i][j]->get_col(), tile2[i][j]->get_row()+6, tile2[i][j]->get_col()-2, tile2[i][j]->get_row()+2, tile2[i][j]->get_col()-2, tile2[i][j]->get_row()+4, tile2[i][j]->get_col()));
+                m_window->set_of_moves->add_movement(movement(6, main_tile[i][j]->get_row(), main_tile[i][j]->get_col(), main_tile[i][j]->get_row()+6, main_tile[i][j]->get_col()-2, main_tile[i][j]->get_row()+2, main_tile[i][j]->get_col()-2, main_tile[i][j]->get_row()+4, main_tile[i][j]->get_col()));
             }
         }
     }
